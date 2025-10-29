@@ -1,383 +1,217 @@
-# 🎨 EIS Ultra Theme
+# 🎨 EIS Ultra Theme v1.0.0  
+**Lightweight · Modular · Blazing Fast**  
+Modern WordPress theme workspace optimized for SEO, Core Web Vitals, and lightning-fast deployment.
 
-> **Lightweight modular WordPress theme development workspace**  
-> Built with PHP + HTML + CSS for high-speed SEO-optimized web pages
-
-[![PHP Version](https://img.shields.io/badge/PHP-8.2+-777BB4?style=flat-square&logo=php&logoColor=white)](https://www.php.net/)
-[![WordPress](https://img.shields.io/badge/WordPress-5.0+-21759B?style=flat-square&logo=wordpress&logoColor=white)](https://wordpress.org/)
-[![License](https://img.shields.io/badge/License-GPL%20v2-blue.svg?style=flat-square)](http://www.gnu.org/licenses/gpl-2.0.html)
-[![Performance](https://img.shields.io/badge/Lighthouse-95%2B-brightgreen?style=flat-square&logo=lighthouse&logoColor=white)](https://pagespeed.web.dev/)
-[![SEO Score](https://img.shields.io/badge/SEO-100%25-success?style=flat-square)](https://web.dev/seo/)
-
----
-
-## 🚀 **Features at a Glance**
-
-### ⚡ **Performance First**
-- ✅ **Ultra Lightweight** - ~10KB CSS, minimal JavaScript footprint
-- ✅ **Core Web Vitals Ready** - Optimized for LCP < 2.5s, FID < 100ms, CLS < 0.1
-- ✅ **95+ Lighthouse Score** - Built for perfect performance metrics
-
-### 🎯 **SEO & Marketing**
-- ✅ **Schema.org Structured Data** - Rich snippets and enhanced search results
-- ✅ **Open Graph & Twitter Cards** - Beautiful social media previews
-- ✅ **Semantic HTML5** - Search engine optimized markup
-
-### 🛠️ **Developer Friendly**
-- ✅ **Zero Dependencies** - No jQuery, no Bootstrap, pure vanilla code
-- ✅ **Modular Architecture** - Clean template parts system
-- ✅ **WordPress Standards** - Follows all coding best practices
-
-### ♿ **Accessibility**
-- ✅ **WCAG 2.1 Level AA** - Full accessibility compliance
-- ✅ **ARIA Labels** - Screen reader friendly
-- ✅ **Keyboard Navigation** - Complete keyboard support
+[![PHP](https://img.shields.io/badge/PHP-8.2-777BB4?logo=php&logoColor=white)](https://www.php.net/)
+[![WordPress](https://img.shields.io/badge/WordPress-5.0+-21759B?logo=wordpress&logoColor=white)](https://wordpress.org/)
+[![License](https://img.shields.io/badge/License-GPLv2-blue.svg)](http://www.gnu.org/licenses/gpl-2.0.html)
+[![Version](https://img.shields.io/badge/Version-1.0.0-brightgreen)](#)
+[![Performance](https://img.shields.io/badge/Lighthouse-95+-success?logo=lighthouse&logoColor=white)](https://pagespeed.web.dev/)
 
 ---
 
-## 📋 **Quick Start Guide**
+## ⚡ Overview
 
-### **1️⃣ Development Preview (Current Environment)**
+EIS Ultra Theme is a modular, performance-first WordPress theme built on PHP 8.2 and pure HTML5/CSS3.  
+Designed for Google Core Web Vitals excellence, instant SEO indexing, and a minimal-dependency architecture for scalable deployment.
+
+---
+
+## 🧩 Key Features
+
+| Feature | Description |
+|:--|:--|
+| ⚙️ **Modular Architecture** | Reusable template parts system for components (header, footer, content, sidebar) |
+| ⚡ **Performance-Driven** | LCP ≤ 2.5s  ·  CLS ≤ 0.1  ·  FID ≤ 100ms |
+| 🔍 **SEO + Schema Ready** | Auto-injected Schema.org, Open Graph & Twitter metadata |
+| 📱 **Responsive & Accessible** | Mobile-first CSS, WCAG 2.1 AA compliance |
+| 🧱 **Framework-Free** | No Bootstrap or jQuery — pure vanilla performance |
+| 🔒 **Production Aligned** | WordPress standards compliant, ready for deployment |
+| 🧾 **Complete Templates** | All essential WordPress templates included |
+
+---
+
+## 📁 Project Structure
+
+```
+.
+├── 📄 Root Files
+│   ├── .replit                     # Replit configuration
+│   ├── .gitignore                  # Git ignore rules
+│   ├── index.php                   # Local preview launcher
+│   ├── test-performance.php        # Performance testing dashboard
+│   │
+│   ├── 📚 Documentation
+│   │   ├── README.md               # Project overview (this file)
+│   │   ├── QUICK_START.md          # Quick start guide & usage instructions
+│   │   └── replit.md               # Complete developer documentation
+│   │
+│   └── wp-content/themes/eis-ultra-theme/    # WordPress Theme
+│       ├── style.css               # Theme stylesheet + metadata
+│       ├── functions.php           # Theme setup and hooks
+│       ├── header.php              # Site header template
+│       ├── footer.php              # Site footer template
+│       ├── sidebar.php             # Sidebar widget area
+│       ├── index.php               # Main blog/archive template
+│       ├── single.php              # Single post template
+│       ├── page.php                # Static page template
+│       ├── archive.php             # Archive pages template
+│       ├── search.php              # Search results template
+│       ├── searchform.php          # Search form template
+│       ├── comments.php            # Comments template
+│       ├── 404.php                 # Error page template
+│       │
+│       ├── js/
+│       │   └── navigation.js       # Mobile menu toggle
+│       │
+│       └── template-parts/         # Modular template components
+│           ├── content.php         # Default post content
+│           ├── content-single.php  # Single post content
+│           ├── content-page.php    # Page content
+│           ├── content-search.php  # Search result content
+│           └── content-none.php    # No content found message
+```
+
+---
+
+## 📚 Documentation Guide
+
+### **QUICK_START.md**
+*Quick reference guide for getting started*
+- 🚀 Preview instructions and live demo access
+- 📦 WordPress installation steps
+- ✨ Feature highlights and what's included
+- 🔧 Development workflow basics
+
+### **replit.md**
+*Complete technical documentation*
+- 🏗️ Detailed architecture and file descriptions
+- 🎨 Comprehensive customization guide
+- 📊 Performance optimization strategies
+- 🛠️ WordPress integration instructions
+- 🔍 Troubleshooting and technical details
+- 📝 Code examples and best practices
+
+---
+
+## 🧪 Development Environment
+
+**Platform:** Replit  
+**Server:** PHP 8.2 Development Server
 
 ```bash
-# Server is already running on port 5000
-# Access your theme at the webview URL
-
-# View pages:
-/                         # Main preview page
-/test-performance.php     # Performance testing dashboard
-```
-
-### **2️⃣ WordPress Installation**
-
-```bash
-# Step 1: Copy theme to WordPress
-cp -r wp-content/themes/eis-ultra-theme/ /path/to/wordpress/wp-content/themes/
-
-# Step 2: Activate in WordPress Admin
-# Go to: Appearance → Themes → Activate "EIS Ultra Theme"
-```
-
----
-
-## 📁 **Project Structure**
-
-```
-eis-ultra-theme/
-│
-├── 📄 Core Files
-│   ├── style.css                    # Main stylesheet + theme metadata
-│   ├── functions.php                # Theme setup and hooks
-│   ├── index.php                    # Main template (blog/archive)
-│   ├── screenshot.png               # Theme preview image
-│   └── searchform.php               # Custom search form
-│
-├── 📑 Page Templates
-│   ├── header.php                   # Site header
-│   ├── footer.php                   # Site footer
-│   ├── sidebar.php                  # Widget area
-│   ├── single.php                   # Single post
-│   ├── page.php                     # Static pages
-│   ├── archive.php                  # Category/tag archives
-│   ├── search.php                   # Search results
-│   ├── 404.php                      # Error page
-│   └── comments.php                 # Comments template
-│
-├── 🧩 Template Parts
-│   └── template-parts/
-│       ├── content.php              # Default post loop
-│       ├── content-single.php       # Single post content
-│       ├── content-page.php         # Page content
-│       ├── content-search.php       # Search result item
-│       └── content-none.php         # No results message
-│
-└── 📦 Assets
-    └── js/
-        └── navigation.js             # Mobile menu toggle
-```
-
----
-
-## 🎨 **Customization Guide**
-
-### **Change Theme Colors**
-
-Edit CSS variables in `style.css`:
-
-```css
-:root {
-  --color-primary: #2563eb;      /* Primary brand color */
-  --color-secondary: #1e293b;    /* Secondary/headings */
-  --color-text: #334155;         /* Body text */
-  --color-background: #ffffff;   /* Page background */
-  --color-border: #e2e8f0;       /* Border color */
-  
-  /* Typography */
-  --font-family-base: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  --font-size-base: 16px;
-  --line-height-base: 1.6;
-  
-  /* Spacing */
-  --spacing-sm: 1rem;
-  --spacing-md: 1.5rem;
-  --spacing-lg: 2rem;
-}
-```
-
-### **Add Custom Templates**
-
-Create new PHP files following WordPress naming conventions:
-
-```php
-<?php
-/**
- * Template Name: Custom Landing Page
- * Template Post Type: page
- */
-
-get_header();
-?>
-
-<!-- Your custom template code -->
-
-<?php
-get_footer();
-```
-
-### **Register New Widget Areas**
-
-Add to `functions.php`:
-
-```php
-function eis_ultra_register_widget() {
-    register_sidebar(array(
-        'name'          => 'Custom Widget Area',
-        'id'            => 'custom-widget',
-        'before_widget' => '<div class="widget">',
-        'after_widget'  => '</div>',
-        'before_title'  => '<h3 class="widget-title">',
-        'after_title'   => '</h3>',
-    ));
-}
-add_action('widgets_init', 'eis_ultra_register_widget');
-```
-
----
-
-## 📊 **Performance Optimization**
-
-### **Core Web Vitals Targets**
-
-| Metric | **Target** | **Current** | **Optimization** |
-|--------|------------|-------------|------------------|
-| **LCP** | < 2.5s | ✅ Optimized | Minimal CSS, optimized images |
-| **FID** | < 100ms | ✅ Optimized | Minimal JavaScript, async loading |
-| **CLS** | < 0.1 | ✅ Optimized | Fixed dimensions, no layout shifts |
-| **Performance** | 95+ | ✅ Achieved | Lightweight, no frameworks |
-| **SEO** | 100 | ✅ Perfect | Semantic HTML, meta tags, schema |
-
-### **Testing Tools**
-
-#### **Built-in Dashboard**
-Navigate to `/test-performance.php` for:
-- 📈 Core Web Vitals documentation
-- 🔗 Direct links to testing tools
-- 📝 Performance checklist
-- 💻 Browser API examples
-
-#### **External Tools**
-
-| Tool | Purpose | URL |
-|------|---------|-----|
-| **PageSpeed Insights** | Google's official tool | [pagespeed.web.dev](https://pagespeed.web.dev/) |
-| **Lighthouse** | Chrome DevTools audit | Press `F12` → Lighthouse tab |
-| **WebPageTest** | Detailed analysis | [webpagetest.org](https://www.webpagetest.org/) |
-| **GTmetrix** | Performance grading | [gtmetrix.com](https://gtmetrix.com/) |
-
-### **Optimization Checklist**
-
-- [x] **Minified CSS** - Lightweight stylesheets
-- [x] **Minimal JavaScript** - Only essential scripts
-- [x] **No External Dependencies** - Zero frameworks
-- [x] **Semantic HTML5** - Proper document structure
-- [x] **Responsive Images** - Support for srcset
-- [x] **Lazy Loading Ready** - Native browser support
-- [x] **Schema.org Markup** - Rich snippets
-- [x] **Open Graph Tags** - Social media optimization
-- [x] **Cache Headers** - Production-ready caching
-- [x] **Accessibility Compliant** - WCAG 2.1 Level AA
-
----
-
-## 🛠️ **Technical Specifications**
-
-### **System Requirements**
-
-| Component | **Minimum** | **Recommended** |
-|-----------|-------------|-----------------|
-| **PHP** | 7.4 | 8.2+ |
-| **WordPress** | 5.0 | 6.4+ |
-| **MySQL** | 5.6 | 8.0+ |
-| **Browser** | Modern (2020+) | Latest versions |
-
-### **Theme Features Support**
-
-```php
-// Enabled WordPress Features
-✅ add_theme_support('automatic-feed-links');
-✅ add_theme_support('title-tag');
-✅ add_theme_support('post-thumbnails');
-✅ add_theme_support('html5', array(...));
-✅ add_theme_support('custom-logo');
-✅ add_theme_support('custom-background');
-✅ add_theme_support('responsive-embeds');
-✅ add_theme_support('editor-styles');
-```
-
-### **Registered Components**
-
-#### **Navigation Menus**
-- `primary` - Main header navigation
-- `footer` - Footer menu links
-
-#### **Widget Areas**
-- `sidebar-1` - Main sidebar
-- `footer-1` - Footer widgets
-
-#### **Image Sizes**
-- `eis-ultra-featured` - 1200x630px (featured images)
-- `eis-ultra-thumbnail` - 400x300px (thumbnails)
-
----
-
-## 📚 **Documentation**
-
-### **File References**
-
-| File | Purpose |
-|------|---------|
-| **`replit.md`** | Complete developer documentation |
-| **`README.md`** | This file - project overview |
-| **`QUICK_START.md`** | Getting started guide |
-| **`index.php`** | Demo preview launcher |
-| **`test-performance.php`** | Performance testing tools |
-
-### **WordPress Resources**
-
-- 📖 [Theme Development Handbook](https://developer.wordpress.org/themes/)
-- 🏗️ [Template Hierarchy](https://developer.wordpress.org/themes/basics/template-hierarchy/)
-- 🔧 [Theme Functions](https://developer.wordpress.org/themes/basics/theme-functions/)
-- ♿ [Accessibility Handbook](https://make.wordpress.org/accessibility/handbook/)
-
----
-
-## 🔧 **Development Workflow**
-
-### **Local Development**
-
-```bash
-# Start development server (already running)
+# Server runs automatically
 php -S 0.0.0.0:5000 -t .
-
-# Watch for changes (files auto-reload on save)
-# Edit → Save → Refresh browser
 ```
 
-### **Testing Workflow**
+**Preview:** Access via the Replit webview
 
-```bash
-# 1. Make changes to theme files
-# 2. Refresh browser to see updates
-# 3. Test with Chrome DevTools (F12)
-# 4. Run Lighthouse audit
-# 5. Check console for errors
-```
-
-### **Production Deployment**
-
-```bash
-# 1. Test all templates locally
-# 2. Run performance audits
-# 3. Copy theme to WordPress
-# 4. Activate and configure
-# 5. Clear caches
-# 6. Verify live performance
-```
+### Workflow
+1. Click **Run** to start the PHP server
+2. Edit files → Changes appear on refresh
+3. Test via `/test-performance.php`
+4. Use Chrome DevTools for debugging
 
 ---
 
-## 🚀 **Roadmap & Future Enhancements**
+## 🧠 Performance Targets
 
-### **Version 2.0 Plans**
-
-- [ ] **WooCommerce Support** - E-commerce templates
-- [ ] **Gutenberg Blocks** - Custom block patterns
-- [ ] **Dark Mode** - Auto-switching theme
-- [ ] **Advanced Customizer** - More theme options
-- [ ] **REST API Integration** - Headless WordPress support
-- [ ] **PWA Features** - Offline capability
-- [ ] **AMP Support** - Accelerated Mobile Pages
-- [ ] **Multi-language** - WPML/Polylang ready
+| Metric | Target | Purpose |
+|:--|:--|:--|
+| **LCP** | ≤ 2.5s | Largest Contentful Paint |
+| **CLS** | ≤ 0.1 | Cumulative Layout Shift |
+| **FID** | ≤ 100ms | First Input Delay |
+| **Performance Score** | 95+ | Lighthouse metric |
+| **SEO Score** | 100 | Search optimization |
 
 ---
 
-## 🤝 **Contributing**
+## 🌐 WordPress Integration
 
-This is an open-source starter theme. Feel free to:
+### Quick Installation
+1. Copy `/wp-content/themes/eis-ultra-theme/` to your WordPress installation
+2. Navigate to **Appearance → Themes** in WordPress admin
+3. Activate **EIS Ultra Theme**
+4. Customize via **Appearance → Customize**
 
-1. **Fork** the repository
-2. **Modify** for your needs
-3. **Share** improvements
-4. **Report** issues
-5. **Suggest** features
-
----
-
-## 📝 **License**
-
-This theme is licensed under the **GNU General Public License v2 or later**.
-
-```text
-This program is free software; you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation; either version 2 of the License, or
-(at your option) any later version.
-```
-
-Full license: [GPLv2](http://www.gnu.org/licenses/gpl-2.0.html)
+### Theme Features
+- ✅ Post thumbnails (featured images)
+- ✅ Custom menus (primary + footer)
+- ✅ Widget areas (sidebar + footer)
+- ✅ Custom logo support
+- ✅ Translation ready
+- ✅ Editor styles
 
 ---
 
-## 📧 **Support & Contact**
+## 🧾 Version History
 
-### **Theme Support**
-- 💬 [WordPress Forums](https://wordpress.org/support/forums/)
-- 📚 [Stack Exchange](https://wordpress.stackexchange.com/)
-- 🐛 [Issue Tracker](https://github.com/your-username/eis-ultra-theme/issues)
-
-### **Professional Services**
-- 🏢 **Agency:** EIS Ultra Systems
-- 📧 **Email:** support@example.com
-- 🌐 **Website:** https://example.com
+| Version | Date | Notes |
+|---------|------|-------|
+| **1.0.0** | Oct 29, 2025 | Initial release with complete WordPress theme structure |
 
 ---
 
-## ⭐ **Acknowledgments**
+## 🧰 Requirements
 
-Built with ❤️ for the WordPress community.
-
-**Special thanks to:**
-- WordPress Core Team
-- Open Source Contributors
-- Performance Optimization Community
-- Accessibility Advocates
+- **PHP:** 7.4+ (8.2 recommended)
+- **WordPress:** 5.0+
+- **Browser:** Chrome, Firefox, Safari, Edge (modern versions)
+- **Server:** Apache or Nginx with PHP support
 
 ---
 
-<div align="center">
+## 🔧 Testing Tools
 
-### **🎯 Mission: Fast, Accessible, Beautiful WordPress Themes**
+### Built-in Performance Dashboard
+Navigate to `/test-performance.php` for:
+- Core Web Vitals documentation
+- Performance testing tools
+- Optimization checklist
+- Browser API examples
 
-**Version:** 1.0.0 | **Last Updated:** October 29, 2025 | **Status:** Production Ready
+### External Tools
+- [Google PageSpeed Insights](https://pagespeed.web.dev/)
+- [WebPageTest](https://www.webpagetest.org/)
+- [GTmetrix](https://gtmetrix.com/)
+- Chrome DevTools Lighthouse
 
-</div>
+---
+
+## 📝 License
+
+This theme is licensed under the **GNU General Public License v2 or later**.  
+See [LICENSE](http://www.gnu.org/licenses/gpl-2.0.html) for details.
+
+---
+
+## 🤝 Contributing
+
+This is an open-source starter theme designed for customization:
+- Fork and modify for your projects
+- Add custom features as needed
+- Use as a learning resource
+- Share improvements with the community
+
+---
+
+## 💬 Support
+
+- **Documentation:** See `replit.md` for complete technical guide
+- **Quick Start:** See `QUICK_START.md` for getting started
+- **WordPress Docs:** [Theme Development Handbook](https://developer.wordpress.org/themes/)
+- **Community:** [WordPress Support Forums](https://wordpress.org/support/forums/)
+
+---
+
+## ⭐ Credits
+
+Built with ❤️ for performance and simplicity.
+
+**Author:** EIS Ultra Theme Development  
+**Version:** 1.0.0  
+**Last Updated:** October 29, 2025
+
+*"Fast pages, happy users."* 🚀
+
+---
