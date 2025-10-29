@@ -1,0 +1,473 @@
+/*
+Theme Name: EIS Ultra Theme
+Theme URI: https://example.com/eis-ultra-theme
+Author: Your Name
+Author URI: https://example.com
+Description: Lightweight modular WordPress theme optimized for speed and SEO. Built with performance-first principles for high Core Web Vitals scores.
+Version: 1.0.0
+Requires at least: 5.0
+Tested up to: 6.4
+Requires PHP: 7.4
+License: GNU General Public License v2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: eis-ultra-theme
+Tags: custom-background, custom-logo, custom-menu, featured-images, threaded-comments, translation-ready, responsive-layout, accessibility-ready
+*/
+
+/* ==========================================================================
+   CSS Reset & Box Sizing
+   ========================================================================== */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* ==========================================================================
+   Base Styles
+   ========================================================================== */
+
+:root {
+  --color-primary: #2563eb;
+  --color-secondary: #1e293b;
+  --color-text: #334155;
+  --color-text-light: #64748b;
+  --color-background: #ffffff;
+  --color-background-alt: #f8fafc;
+  --color-border: #e2e8f0;
+  --font-family-base: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-family-heading: var(--font-family-base);
+  --font-size-base: 16px;
+  --line-height-base: 1.6;
+  --spacing-xs: 0.5rem;
+  --spacing-sm: 1rem;
+  --spacing-md: 1.5rem;
+  --spacing-lg: 2rem;
+  --spacing-xl: 3rem;
+  --max-width: 1200px;
+  --border-radius: 0.375rem;
+}
+
+html {
+  font-size: var(--font-size-base);
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-family-base);
+  font-size: 1rem;
+  line-height: var(--line-height-base);
+  color: var(--color-text);
+  background-color: var(--color-background);
+  overflow-x: hidden;
+}
+
+/* ==========================================================================
+   Typography
+   ========================================================================== */
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-family-heading);
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--color-secondary);
+  margin-bottom: var(--spacing-sm);
+}
+
+h1 { font-size: 2.5rem; }
+h2 { font-size: 2rem; }
+h3 { font-size: 1.75rem; }
+h4 { font-size: 1.5rem; }
+h5 { font-size: 1.25rem; }
+h6 { font-size: 1rem; }
+
+p {
+  margin-bottom: var(--spacing-sm);
+}
+
+a {
+  color: var(--color-primary);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+a:hover,
+a:focus {
+  color: var(--color-secondary);
+  text-decoration: underline;
+}
+
+a:focus {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* ==========================================================================
+   Layout Components
+   ========================================================================== */
+
+.site-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.site-header {
+  background-color: var(--color-background);
+  border-bottom: 1px solid var(--color-border);
+  padding: var(--spacing-sm) 0;
+}
+
+.site-header .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.site-branding {
+  display: flex;
+  align-items: center;
+}
+
+.site-title {
+  font-size: 1.5rem;
+  margin: 0;
+}
+
+.site-title a {
+  color: var(--color-secondary);
+  text-decoration: none;
+}
+
+.site-title a:hover {
+  color: var(--color-primary);
+}
+
+.site-description {
+  font-size: 0.875rem;
+  color: var(--color-text-light);
+  margin: 0;
+}
+
+.site-main {
+  flex: 1;
+  padding: var(--spacing-lg) 0;
+}
+
+.site-footer {
+  background-color: var(--color-secondary);
+  color: #ffffff;
+  padding: var(--spacing-lg) 0;
+  margin-top: auto;
+}
+
+.site-footer a {
+  color: #ffffff;
+}
+
+.container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 var(--spacing-sm);
+}
+
+/* ==========================================================================
+   Navigation
+   ========================================================================== */
+
+.main-navigation {
+  display: flex;
+  align-items: center;
+}
+
+.main-navigation ul {
+  list-style: none;
+  display: flex;
+  gap: var(--spacing-md);
+  margin: 0;
+  padding: 0;
+}
+
+.main-navigation a {
+  color: var(--color-text);
+  font-weight: 500;
+  padding: var(--spacing-xs) var(--spacing-sm);
+  display: block;
+  transition: color 0.2s ease;
+}
+
+.main-navigation a:hover,
+.main-navigation a:focus {
+  color: var(--color-primary);
+  text-decoration: none;
+}
+
+.menu-toggle {
+  display: none;
+  background: none;
+  border: 2px solid var(--color-border);
+  padding: var(--spacing-xs) var(--spacing-sm);
+  cursor: pointer;
+  border-radius: var(--border-radius);
+}
+
+/* ==========================================================================
+   Content
+   ========================================================================== */
+
+.content-area {
+  flex: 1;
+}
+
+article {
+  margin-bottom: var(--spacing-xl);
+}
+
+.entry-header {
+  margin-bottom: var(--spacing-md);
+}
+
+.entry-title {
+  margin-bottom: var(--spacing-xs);
+}
+
+.entry-meta {
+  font-size: 0.875rem;
+  color: var(--color-text-light);
+  margin-bottom: var(--spacing-sm);
+}
+
+.entry-content {
+  margin-bottom: var(--spacing-md);
+}
+
+.entry-content > * + * {
+  margin-top: var(--spacing-sm);
+}
+
+.entry-footer {
+  padding-top: var(--spacing-sm);
+  border-top: 1px solid var(--color-border);
+  font-size: 0.875rem;
+  color: var(--color-text-light);
+}
+
+/* ==========================================================================
+   Sidebar
+   ========================================================================== */
+
+.sidebar {
+  margin-top: var(--spacing-lg);
+}
+
+.widget {
+  background-color: var(--color-background-alt);
+  padding: var(--spacing-md);
+  border-radius: var(--border-radius);
+  margin-bottom: var(--spacing-md);
+}
+
+.widget-title {
+  font-size: 1.25rem;
+  margin-bottom: var(--spacing-sm);
+}
+
+.widget ul {
+  list-style: none;
+}
+
+.widget li {
+  padding: var(--spacing-xs) 0;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.widget li:last-child {
+  border-bottom: none;
+}
+
+/* ==========================================================================
+   Comments
+   ========================================================================== */
+
+.comments-area {
+  margin-top: var(--spacing-xl);
+  padding-top: var(--spacing-lg);
+  border-top: 2px solid var(--color-border);
+}
+
+.comment-list {
+  list-style: none;
+}
+
+.comment {
+  margin-bottom: var(--spacing-md);
+  padding: var(--spacing-md);
+  background-color: var(--color-background-alt);
+  border-radius: var(--border-radius);
+}
+
+.comment-meta {
+  font-size: 0.875rem;
+  color: var(--color-text-light);
+  margin-bottom: var(--spacing-sm);
+}
+
+/* ==========================================================================
+   Forms
+   ========================================================================== */
+
+input[type="text"],
+input[type="email"],
+input[type="url"],
+input[type="password"],
+input[type="search"],
+input[type="number"],
+input[type="tel"],
+textarea,
+select {
+  width: 100%;
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius);
+  font-family: inherit;
+  font-size: 1rem;
+  transition: border-color 0.2s ease;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+button,
+input[type="submit"],
+input[type="button"] {
+  background-color: var(--color-primary);
+  color: #ffffff;
+  border: none;
+  padding: var(--spacing-xs) var(--spacing-md);
+  border-radius: var(--border-radius);
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+button:hover,
+input[type="submit"]:hover,
+input[type="button"]:hover {
+  background-color: var(--color-secondary);
+}
+
+/* ==========================================================================
+   Utilities
+   ========================================================================== */
+
+.screen-reader-text {
+  clip: rect(1px, 1px, 1px, 1px);
+  position: absolute !important;
+  height: 1px;
+  width: 1px;
+  overflow: hidden;
+  word-wrap: normal !important;
+}
+
+.alignleft {
+  float: left;
+  margin-right: var(--spacing-md);
+  margin-bottom: var(--spacing-sm);
+}
+
+.alignright {
+  float: right;
+  margin-left: var(--spacing-md);
+  margin-bottom: var(--spacing-sm);
+}
+
+.aligncenter {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ==========================================================================
+   Responsive Design - Mobile First
+   ========================================================================== */
+
+@media (min-width: 768px) {
+  :root {
+    --font-size-base: 18px;
+  }
+  
+  h1 { font-size: 3rem; }
+  h2 { font-size: 2.25rem; }
+  h3 { font-size: 1.875rem; }
+  
+  .site-main {
+    padding: var(--spacing-xl) 0;
+  }
+  
+  .content-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 300px;
+    gap: var(--spacing-xl);
+  }
+  
+  .sidebar {
+    margin-top: 0;
+  }
+}
+
+@media (max-width: 767px) {
+  .menu-toggle {
+    display: block;
+  }
+  
+  .main-navigation ul {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background-color: var(--color-background);
+    border-bottom: 1px solid var(--color-border);
+    padding: var(--spacing-sm);
+  }
+  
+  .main-navigation.toggled ul {
+    display: flex;
+  }
+  
+  .main-navigation li {
+    width: 100%;
+  }
+}
+
+/* ==========================================================================
+   Performance Optimizations
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

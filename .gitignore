@@ -1,0 +1,53 @@
+# -------------------------------
+# EIS Ultra Theme .gitignore
+# -------------------------------
+
+# Replit + system cache
+.cache/
+.replit_history
+*.replit_backup*
+replit.nix
+replit.db
+*.pid
+
+# OS / Editor junk
+.DS_Store
+Thumbs.db
+*.log
+*.tmp
+*.bak
+*.swp
+*~
+
+# Node, Python, or dependency folders (safety)
+node_modules/
+venv/
+__pycache__/
+
+# Git-related temp
+*.orig
+*.rej
+
+# Compiled assets (optional)
+*.min.js
+*.min.css
+*.map
+
+# Backups or test files
+file_tree.txt
+test-performance.php
+
+# WordPress exports & vendor packages
+wp-content/uploads/
+wp-content/cache/
+wp-content/upgrade/
+wp-content/backup-*/
+
+# Do NOT ignore your custom themes
+!wp-content/themes/eis-ultra-theme/
+!eis-ultra/
+
+# Logs & environment files
+*.env
+.env.local
+.env.production

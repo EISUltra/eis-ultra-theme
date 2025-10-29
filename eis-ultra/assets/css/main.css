@@ -1,0 +1,21 @@
+body {
+  margin: 0;
+  font-family: system-ui, sans-serif;
+  background: #f9fafb;
+  color: #222;
+}
+.container {
+  max-width: 960px;
+  margin: auto;
+  padding: 2rem;
+}
+.hero {
+  background: #0aa77d;
+  color: #fff;
+  padding: 4rem 2rem;
+  text-align: center;
+  border-radius: 12px;
+}
+section {
+  margin: 3rem 0;
+}
