@@ -1,53 +1,115 @@
-# -------------------------------
-# EIS Ultra Theme .gitignore
-# -------------------------------
+# ----------------------------------------
+# 🩺 EIS Ultra Theme – Unified .gitignore
+# ----------------------------------------
+# Optimized for Replit + WordPress hybrid workflow
+# Keeps repo clean while preserving essential theme + docs
 
-# Replit + system cache
+# ----------------------------------------
+# ⚙️ Replit + Local System Cache
+# ----------------------------------------
 .cache/
 .replit_history
 *.replit_backup*
 replit.nix
 replit.db
 *.pid
+modules/
+.nix/
+.local/
 
-# OS / Editor junk
+# ----------------------------------------
+# 💻 OS & Editor Junk
+# ----------------------------------------
 .DS_Store
 Thumbs.db
+ehthumbs.db
+Icon?
+desktop.ini
 *.log
 *.tmp
 *.bak
 *.swp
 *~
+*.old
 
-# Node, Python, or dependency folders (safety)
+# ----------------------------------------
+# 🧩 Language / Dependency Artifacts
+# ----------------------------------------
 node_modules/
 venv/
 __pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.egg-info/
+site/
+dist/
+build/
+vendor/
+composer.lock
+composer.phar
 
-# Git-related temp
+# ----------------------------------------
+# 🧾 Git-related temp files
+# ----------------------------------------
 *.orig
 *.rej
 
-# Compiled assets (optional)
+# ----------------------------------------
+# 🧪 Compiled / Generated Assets
+# ----------------------------------------
 *.min.js
 *.min.css
 *.map
+*.zip
+*.tar.gz
+*.gz
 
-# Backups or test files
-file_tree.txt
-test-performance.php
-
-# WordPress exports & vendor packages
+# ----------------------------------------
+# 🧱 WordPress Core (exclude to prevent repo bloat)
+# ----------------------------------------
+wp-admin/
+wp-includes/
 wp-content/uploads/
 wp-content/cache/
 wp-content/upgrade/
 wp-content/backup-*/
+wp-content/plugins/
+wp-content/languages/
 
-# Do NOT ignore your custom themes
-!wp-content/themes/eis-ultra-theme/
-!eis-ultra/
+# ✅ Keep custom theme and shared includes
+!wp-content/themes/eis-ultra-theme/**
+!wp-content/includes/**
+!eis-ultra/**
 
-# Logs & environment files
+# ----------------------------------------
+# 📚 Documentation & Config Files
+# ----------------------------------------
+!/README.md
+!/QUICK_START.md
+!/replit.md
+!/scripts/**
+!/VERSION
+!.replit
+!.gitignore
+
+# ----------------------------------------
+# 🧮 Project Files You Might Want Ignored
+# ----------------------------------------
+file_tree.txt
+test-performance.php
 *.env
 .env.local
 .env.production
+.env.development
+
+# ----------------------------------------
+# 🧹 Logs & Reports
+# ----------------------------------------
+*.sql
+*.sqlite
+*.csv
+logs/
+log/
+tmp/
+temp/

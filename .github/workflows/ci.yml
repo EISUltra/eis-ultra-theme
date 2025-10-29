@@ -1,0 +1,120 @@
+name: EIS Ultra Theme CI/CD
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  bump:
+    name: 🔼 Auto Bump Version
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 🧩 Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: ⚙️ Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 8.2
+
+      - name: 🧮 Bump Version
+        run: |
+          php scripts/bump_version.php patch
+
+      - name: 🔄 Sync All style.css Versions
+        run: |
+          VERSION=$(cat VERSION)
+          STYLE_FILES=(
+            "wp-content/themes/eis-ultra-theme/style.css"
+            "eis-ultra/style.css"
+          )
+          for FILE in "${STYLE_FILES[@]}"; do
+            if [ -f "$FILE" ]; then
+              echo "🔧 Updating Version in $FILE → $VERSION"
+              sed -i "s/^Version: .*/Version: $VERSION/" "$FILE"
+            else
+              echo "⚠️ Skipping missing file: $FILE"
+            fi
+          done
+
+      - name: 💾 Commit & Push Version + style.css
+        run: |
+          git config user.name "EIS Ultra CI"
+          git config user.email "ci@eisultra.dev"
+          git add VERSION wp-content/themes/eis-ultra-theme/style.css eis-ultra/style.css || true
+          git commit -m "Auto bump version → $VERSION [skip ci]" || echo "No changes to commit"
+          git push
+
+  build:
+    name: 🏗️ Build & Package Theme
+    needs: bump
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 🧩 Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: ⚙️ Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 8.2
+
+      - name: 🧮 Read Version
+        id: version
+        run: |
+          VERSION=$(cat VERSION)
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+          echo "📦 Detected version: $VERSION"
+
+      - name: 🗜️ Build Theme ZIP
+        run: |
+          mkdir -p dist
+          cd wp-content/themes
+          zip -r ../../../dist/eis-ultra-theme-${{ steps.version.outputs.version }}.zip eis-ultra-theme \
+            -x "*.git*" "*.github*" "*.DS_Store*" "node_modules/*" "__MACOSX/*"
+          echo "✅ Theme ZIP created: dist/eis-ultra-theme-${{ steps.version.outputs.version }}.zip"
+
+      - name: 📤 Upload Build Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: eis-ultra-theme-${{ steps.version.outputs.version }}
+          path: dist/eis-ultra-theme-${{ steps.version.outputs.version }}.zip
+
+  release:
+    name: 🚀 Publish GitHub Release
+    needs: build
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+
+    steps:
+      - name: 🧩 Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: 🧮 Read Version
+        id: version
+        run: |
+          VERSION=$(cat VERSION)
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+
+      - name: 📦 Download Artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: eis-ultra-theme-${{ steps.version.outputs.version }}
+          path: dist
+
+      - name: 🚀 Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: v${{ steps.version.outputs.version }}
+          name: "EIS Ultra Theme v${{ steps.version.outputs.version }}"
+          body: |
+            🩺 **EIS Ultra Theme**
+            Lightweight · Modular · Blazing Fast  
+            Built and released automatically on push to main.
+
+            🔖 Version: v${{ steps.version.outputs.version }}
+            📦 ZIP included as downloadable release asset.
+          files: dist/eis-ultra-theme-${{ steps.version.outputs.version }}.zip
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

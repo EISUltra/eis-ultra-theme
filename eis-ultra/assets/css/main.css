@@ -19,3 +19,15 @@ body {
 section {
   margin: 3rem 0;
 }
+
+/* Theme Version Display */
+.theme-version {
+  font-family: system-ui, sans-serif;
+  color: #666;
+  font-size: 12px;
+  text-align: center;
+  opacity: 0.6;
+  margin-top: 20px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}

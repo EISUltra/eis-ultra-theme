@@ -1,9 +1,30 @@
-modules = ["php-8.2"]
+# 🩺 EIS Ultra Theme – Replit Configuration
+# ----------------------------------------
+# Unified PHP 8.2 + Python 3.11 environment for local preview
+# and workflow-based auto-launch
+
+modules = ["php-8.2", "python-3.11"]
 
 [env]
 PHP_DISPLAY_ERRORS = "1"
 PHP_ERROR_REPORTING = "E_ALL"
+REPLIT_APP_PORT = "8000"
 
+[nix]
+packages = ["tree"]
+
+# 🧹 Developer Alias – quickly clean caches and logs
+[aliases]
+clean-project = "rm -rf __pycache__ .cache .local node_modules .replit_history *.log *.tmp"
+
+# ----------------------------------------
+# 🚀 Default Run Command (simple fallback)
+# ----------------------------------------
+run = "php -S 0.0.0.0:8000 -t ."
+
+# ----------------------------------------
+# 🧩 Replit Workflows (GUI Run Button)
+# ----------------------------------------
 [workflows]
 runButton = "Project"
 
@@ -25,18 +46,14 @@ author = "agent"
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
-args = "php -S 0.0.0.0:5000 -t ."
-waitForPort = 5000
+args = "php -S 0.0.0.0:8000 -t ."
+waitForPort = 8000
 
 [workflows.workflow.metadata]
 outputType = "webview"
 
 [[ports]]
 localPort = 8000
-externalPort = 80
-
-[[ports]]
-localPort = 5000
 externalPort = 80
 
 [agent]

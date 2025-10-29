@@ -1,0 +1,76 @@
+name: Build & Deploy EIS Ultra Theme
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    needs: bump
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 🧩 Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: ⚙️ Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 8.2
+
+      - name: 🧮 Read Version
+        id: version
+        run: |
+          VERSION=$(cat VERSION)
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+          echo "📦 Detected version: $VERSION"
+
+      - name: 🗜️ Build Theme ZIP
+        run: |
+          mkdir -p dist
+          cd wp-content/themes
+          zip -r ../../../dist/eis-ultra-theme-${{ steps.version.outputs.version }}.zip eis-ultra-theme -x "*.git*" "*.github*" "*.DS_Store*" "node_modules/*" "__MACOSX/*"
+          echo "✅ Theme ZIP created in dist/"
+
+      - name: 📤 Upload Build Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: eis-ultra-theme-${{ steps.version.outputs.version }}
+          path: dist/eis-ultra-theme-${{ steps.version.outputs.version }}.zip
+
+  release:
+    needs: build
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+
+    steps:
+      - name: 🧩 Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: 🧮 Read Version
+        id: version
+        run: |
+          VERSION=$(cat VERSION)
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+
+      - name: 📦 Download Artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: eis-ultra-theme-${{ steps.version.outputs.version }}
+          path: dist
+
+      - name: 🚀 Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: v${{ steps.version.outputs.version }}
+          name: "EIS Ultra Theme v${{ steps.version.outputs.version }}"
+          body: |
+            🩺 **EIS Ultra Theme**  
+            Lightweight · Modular · Blazing Fast  
+            Built automatically on push to main.
+
+            🔖 Version: v${{ steps.version.outputs.version }}
+            📦 ZIP included as downloadable release asset.
+          files: dist/eis-ultra-theme-${{ steps.version.outputs.version }}.zip
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
