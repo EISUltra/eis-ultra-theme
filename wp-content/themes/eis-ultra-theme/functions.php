@@ -1,6 +1,6 @@
 <?php
 /**
- * EIS Ultra Theme – Unified Functions
+ * EIS Ultra Theme – Unified Functions (UrgentMed Edition)
  * Works in both WordPress and Replit standalone preview mode.
  *
  * @package EIS_Ultra_Theme
@@ -115,22 +115,26 @@ if ($is_wp && !function_exists('eis_ultra_theme_setup')) {
     function eis_ultra_theme_scripts() {
         $theme_version = eis_ultra_get_version();
 
-        // Base stylesheet
-        wp_enqueue_style('eis-ultra-style', get_stylesheet_uri(), [], $theme_version);
-
-        // Additional CSS
-        $assets = [
-            'assets/css/main.css'     => 'eis-ultra-main-css',
-            'assets/css/critical.css' => 'eis-ultra-critical-css',
+        // --- CSS: Variables → Critical → Main ---
+        $styles = [
+            'assets/css/_variables.css' => 'eis-ultra-vars',
+            'assets/css/critical.css'   => 'eis-ultra-critical-css',
+            'assets/css/main.css'       => 'eis-ultra-main-css',
         ];
-        foreach ($assets as $path => $handle) {
+
+        foreach ($styles as $path => $handle) {
             $file = get_template_directory() . '/' . $path;
             if (file_exists($file)) {
-                wp_enqueue_style($handle, get_template_directory_uri() . '/' . $path, ['eis-ultra-style'], $theme_version);
+                wp_enqueue_style(
+                    $handle,
+                    get_template_directory_uri() . '/' . $path,
+                    [],
+                    $theme_version
+                );
             }
         }
 
-        // JavaScript
+        // --- JS Files ---
         $scripts = [
             'assets/js/main.js'     => 'eis-ultra-main-js',
             'assets/js/lazyload.js' => 'eis-ultra-lazyload',
@@ -139,11 +143,17 @@ if ($is_wp && !function_exists('eis_ultra_theme_setup')) {
         foreach ($scripts as $path => $handle) {
             $file = get_template_directory() . '/' . $path;
             if (file_exists($file)) {
-                wp_enqueue_script($handle, get_template_directory_uri() . '/' . $path, [], $theme_version, true);
+                wp_enqueue_script(
+                    $handle,
+                    get_template_directory_uri() . '/' . $path,
+                    [],
+                    $theme_version,
+                    true
+                );
             }
         }
 
-        // Comments reply script
+        // Comments reply
         if (is_singular() && comments_open() && get_option('thread_comments')) {
             wp_enqueue_script('comment-reply');
         }
@@ -173,7 +183,7 @@ if ($is_wp && !function_exists('eis_ultra_theme_setup')) {
 
     /**
      * ------------------------------
-     * 🧠 STRUCTURED DATA
+     * 🧠 STRUCTURED DATA (Schema.org)
      * ------------------------------
      */
     function eis_ultra_theme_structured_data() {
@@ -256,5 +266,15 @@ if ($is_wp && !function_exists('eis_ultra_theme_setup')) {
  * ------------------------------
  */
 if (!$is_wp && php_sapi_name() !== 'cli') {
+    // Auto-load CSS in order: variables → critical → main
+    $css_dir = 'eis-ultra/assets/css';
+    $styles = ['_variables.css', 'critical.css', 'main.css'];
+
+    foreach ($styles as $file) {
+        if (file_exists(__DIR__ . "/assets/css/{$file}")) {
+            echo "<link rel='stylesheet' href='{$css_dir}/{$file}?v={$theme_version}'>";
+        }
+    }
+
     error_log("🧩 EIS Ultra Theme loaded in Replit Preview Mode – version {$theme_version}");
 }

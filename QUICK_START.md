@@ -24,8 +24,7 @@ This quick guide helps you get started instantly — whether you're running it i
 
 ## 🧪 Local Development (Replit)
 
-### ✅ **Quick Start**
-
+### ✅ Quick Start
 1. **Open the Replit project**
 2. Click **Run** — your local server will start automatically.
 3. Visit the **webview** pane or click **Open in new tab**.
@@ -40,7 +39,7 @@ php -S 0.0.0.0:8000 -t .
 
 ---
 
-## 🧹 Maintenance Shortcuts
+### 🧹 Maintenance Shortcuts
 
 You can add this alias inside your Replit shell for instant cleanup:
 
@@ -48,8 +47,7 @@ You can add this alias inside your Replit shell for instant cleanup:
 alias clean-project='rm -rf __pycache__ .cache .local node_modules .replit_history *.log *.tmp'
 ```
 
-**Usage:**
-
+Usage:
 ```bash
 clean-project
 ```
@@ -60,45 +58,41 @@ This clears out cached data and temp files safely without touching your theme or
 
 ## 🌐 WordPress Integration
 
-### **Installation**
-
-1. **Copy the folder:**
+### Installation
+1. Copy the folder:
    ```
    /wp-content/themes/eis-ultra-theme/
    ```
-   into your WordPress installation's `/wp-content/themes/`.
-  
-2. **In the WordPress admin dashboard:**
-   - Go to **Appearance → Themes**
-   - Click **Activate** on EIS Ultra Theme
+   into your WordPress installation’s `/wp-content/themes/`.
 
-3. **Customize** via **Appearance → Customize**.
+2. In the WordPress admin dashboard:
+   - Go to **Appearance → Themes**
+   - Click **Activate** on **EIS Ultra Theme**
+
+3. Customize via **Appearance → Customize**.
 
 ---
 
-## ✨ Theme Highlights
+### Theme Highlights
 
-- ✅ **Post Thumbnails**
-- ✅ **Primary & Footer Menus**
-- ✅ **Sidebar + Footer Widgets**
-- ✅ **Custom Logo & Backgrounds**
-- ✅ **Schema.org + OG + Twitter Meta**
-- ✅ **Mobile-First Responsive Layouts**
+✅ **Post Thumbnails**  
+✅ **Primary & Footer Menus**  
+✅ **Sidebar + Footer Widgets**  
+✅ **Custom Logo & Backgrounds**  
+✅ **Schema.org + OG + Twitter Meta**  
+✅ **Mobile-First Responsive Layouts**
 
 ---
 
 ## 🔄 Version Management
 
-### **Automated via GitHub Actions**
-
+### Automated via GitHub Actions
 Each time you push changes, your workflow automatically bumps the version using:
-
 ```
 .github/workflows/version-bump.yml
 ```
 
-### **Manual Bump (CLI)**
-
+### Manual Bump (CLI)
 You can also run it directly:
 
 ```bash
@@ -107,7 +101,7 @@ php scripts/bump_version.php minor
 php scripts/bump_version.php major
 ```
 
-This updates the global **VERSION** file and synchronizes version numbers in:
+This updates the global `VERSION` file and synchronizes version numbers in:
 - `eis-ultra/style.css`
 - `wp-content/themes/eis-ultra-theme/style.css`
 
@@ -148,59 +142,56 @@ This updates the global **VERSION** file and synchronizes version numbers in:
 
 ## 🧠 Performance Tuning
 
-### **Test locally via:**
-
+Test locally via:
 ```
 /test-performance.php
 ```
 
-### **Then verify metrics using:**
-
+Then verify metrics using:
 - [Google PageSpeed Insights](https://pagespeed.web.dev/)
 - [GTmetrix](https://gtmetrix.com/)
 - [WebPageTest.org](https://www.webpagetest.org/)
 
-### **Targets**
-
+**Targets**
 | Metric | Goal |
-|--------|------|
-| **LCP** | ≤ 2.0s |
-| **CLS** | ≤ 0.1 |
-| **INP** | ≤ 100ms |
-| **Page Weight** | ≤ 1 MB |
-| **Lighthouse Score** | ≥ 95 |
+|:--|:--|
+| LCP | ≤ 2.0s |
+| CLS | ≤ 0.1 |
+| INP | ≤ 100ms |
+| Page Weight | ≤ 1 MB |
+| Lighthouse Score | ≥ 95 |
 
 ---
 
 ## 🧾 Deployment Checklist
 
 | Task | Status |
-|------|--------|
-| **Replit version running clean** | ✅ |
-| **VERSION file synced** | ✅ |
-| **Theme validated on WordPress** | ✅ |
-| **GitHub Action auto-bump working** | ✅ |
-| **.replit workflow verified** | ✅ |
+|:--|:--|
+| Replit version running clean | ✅ |
+| VERSION file synced | ✅ |
+| Theme validated on WordPress | ✅ |
+| GitHub Action auto-bump working | ✅ |
+| `.replit` workflow verified | ✅ |
 
 ---
 
 ## 💬 Need Help?
 
-- 📘 **Full documentation:** `replit.md`
-- 💡 **WordPress docs:** [developer.wordpress.org/themes](https://developer.wordpress.org/themes)
-- 💬 **Community:** [wordpress.org/support/forums](https://wordpress.org/support/forums)
+📘 Full documentation: [`replit.md`](./replit.md)  
+💡 WordPress docs: [developer.wordpress.org/themes](https://developer.wordpress.org/themes/)  
+💬 Community: [wordpress.org/support/forums](https://wordpress.org/support/forums/)
 
 ---
 
 ## 🧾 License
 
-**Licensed under GPLv2 or later**  
+Licensed under **GPLv2 or later**  
 [http://www.gnu.org/licenses/gpl-2.0.html](http://www.gnu.org/licenses/gpl-2.0.html)
+
+---
 
 **Author:** EIS Ultra Theme Development  
 **Version:** 1.0.0  
-**Last Updated:** October 29, 2025
-
----
+**Last Updated:** October 29, 2025  
 
 > *"Fast pages, happy users."* 🚀

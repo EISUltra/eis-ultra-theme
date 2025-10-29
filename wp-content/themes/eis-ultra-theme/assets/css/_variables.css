@@ -1,0 +1,49 @@
+/**
+ * EIS Ultra Theme – UrgentMed Color Variables
+ * Shared between Replit + WordPress environments
+ * ------------------------------------------------
+ * These define the global brand identity and
+ * synchronize all front-end color usage.
+ */
+
+:root {
+  /* --- Brand Core --- */
+  --color-primary: #d81921;     /* UrgentMed Red */
+  --color-secondary: #0056a3;   /* Deep Medical Blue */
+  --color-accent: #1ca64c;      /* Health Green Accent */
+  --color-dark: #222;           /* Primary Text / Body */
+  --color-light: #f9fafb;       /* Background */
+  --color-muted: #6c757d;       /* Subtle text */
+
+  /* --- Extended Palette --- */
+  --color-bg-header: var(--color-primary);
+  --color-bg-footer: #00284d;
+  --color-bg-section: #ffffff;
+
+  /* --- UI Elements --- */
+  --btn-bg: var(--color-primary);
+  --btn-bg-hover: #b31217;
+  --btn-text: #fff;
+
+  /* --- Alerts / Status --- */
+  --success: #28a745;
+  --warning: #ffc107;
+  --error: #dc3545;
+  --info: #17a2b8;
+
+  /* --- Gradients --- */
+  --gradient-hero: linear-gradient(135deg, #d81921 0%, #b31217 100%);
+  --gradient-accent: linear-gradient(135deg, #0056a3, #003366);
+
+  /* --- Typography --- */
+  --font-primary: 'Inter', 'Segoe UI', system-ui, sans-serif;
+  --font-accent: 'Montserrat', 'Inter', sans-serif;
+
+  /* --- Shadows & Borders --- */
+  --shadow-soft: 0 2px 6px rgba(0, 0, 0, 0.05);
+  --shadow-strong: 0 4px 12px rgba(0, 0, 0, 0.15);
+  --border-radius: 8px;
+
+  /* --- Transition --- */
+  --transition-fast: 0.15s ease-in-out;
+}

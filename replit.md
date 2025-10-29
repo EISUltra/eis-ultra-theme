@@ -1,373 +1,296 @@
-# EIS Ultra Theme - WordPress Development Workspace
-
-## Overview
-
-**EIS Ultra Theme** is a lightweight, modular WordPress theme development workspace built with performance-first principles. The theme is optimized for speed, SEO, and Core Web Vitals scores using pure PHP, HTML5, and CSS3 without any heavy frameworks or dependencies.
-
-**Current State:** Complete and ready for use. The theme includes all essential WordPress templates, modular components, SEO optimizations, and performance testing tools.
-
-**Version:** 1.0.0  
-**Last Updated:** October 29, 2025
+# 🧠 REPLIT.md  
+> **Developer Manual – EIS Ultra Theme**  
+Full technical documentation for Replit-based development and WordPress integration.
 
 ---
 
-## Recent Changes
+## ⚙️ Overview
 
-### October 29, 2025 - Initial Setup
-- Created complete WordPress theme structure in `wp-content/themes/eis-ultra-theme/`
-- Implemented all core template files (index, single, page, archive, search, 404)
-- Built modular template parts system for reusable components
-- Added lightweight CSS with mobile-first responsive design
-- Configured PHP 8.2 development server for live preview
-- Created performance testing dashboard with Core Web Vitals documentation
-- Set up demo preview page for standalone testing
+The **EIS Ultra Theme** is a dual-environment WordPress theme and Replit-compatible development framework.  
+It enables ultra-fast, modular, SEO-optimized website builds — with live preview capabilities even **outside of WordPress**.
+
+The theme integrates:
+- WordPress Template Hierarchy  
+- Unified version synchronization via `/VERSION`  
+- Standalone Replit runtime environment  
+- CI/CD version automation (GitHub Actions)  
 
 ---
 
-## Project Architecture
-
-### Theme Structure
+## 🧩 System Architecture
 
 ```
-wp-content/themes/eis-ultra-theme/
-├── style.css                    # Main stylesheet with theme metadata
-├── functions.php                # Theme setup and functions
-├── index.php                    # Main template (blog/archive)
-├── header.php                   # Site header template
-├── footer.php                   # Site footer template
-├── sidebar.php                  # Sidebar template
-├── single.php                   # Single post template
-├── page.php                     # Page template
-├── archive.php                  # Archive pages template
-├── search.php                   # Search results template
-├── 404.php                      # 404 error page template
-├── comments.php                 # Comments template
-├── searchform.php               # Custom search form
-├── js/
-│   └── navigation.js            # Mobile navigation toggle
-└── template-parts/              # Modular content components
-    ├── content.php              # Default post content
-    ├── content-single.php       # Single post content
-    ├── content-page.php         # Page content
-    ├── content-search.php       # Search result content
-    └── content-none.php         # No content found message
+.
+├── index.php                  # Replit preview entry point
+├── eis-ultra/                 # Unified theme runtime (for Replit + WP)
+│   ├── header.php / footer.php / functions.php
+│   ├── includes/
+│   │   └── version-utils.php   # Shared version utility (single source of truth)
+│   ├── assets/
+│   │   ├── css/ (main.css, critical.css)
+│   │   ├── js/ (main.js, lazyload.js)
+│   │   └── images/
+│   ├── components/ (Hero, FAQ, Testimonials)
+│   └── seo/ (meta-tags.php, og-twitter.php, schema-org.php)
+│
+├── wp-content/themes/eis-ultra-theme/   # WordPress theme mirror
+│   ├── functions.php (unified)
+│   ├── header.php / footer.php (auto-detect mode)
+│   ├── template-parts/
+│   └── full WP theme structure
+│
+├── scripts/
+│   └── bump_version.php
+├── VERSION
+├── .replit
+└── .github/workflows/version-bump.yml
 ```
 
-### Root Files
+### 🧱 Dual Environment Design
 
-- **index.php** - Standalone preview page (not part of theme)
-- **test-performance.php** - Performance testing dashboard
-- **replit.md** - This documentation file
-
----
-
-## Key Features
-
-### 🚀 Performance Optimized
-- **Lightweight CSS:** ~10KB minified, no frameworks
-- **Minimal JavaScript:** Only essential navigation code
-- **Core Web Vitals Ready:** Optimized for LCP, FID, and CLS
-- **Mobile-First:** Responsive design starting from mobile
-- **No Render Blocking:** Efficient resource loading
-- **Cache Control:** Proper headers for production
-
-### 🎯 SEO Features
-- **Semantic HTML5:** Proper document structure
-- **Schema.org Markup:** Structured data for articles
-- **Open Graph Tags:** Social media optimization
-- **Twitter Cards:** Enhanced social sharing
-- **Meta Descriptions:** Automatic excerpt generation
-- **Clean URLs:** WordPress permalink support
-
-### 🔧 Modular Architecture
-- **Template Parts:** Reusable content components
-- **Widget Areas:** Sidebar and footer widget zones
-- **Navigation Menus:** Primary and footer menus
-- **Custom Logo Support:** Uploadable site branding
-- **Custom Background:** Theme customizer integration
-- **Translation Ready:** i18n support with text domain
-
-### ♿ Accessibility
-- **ARIA Labels:** Proper accessibility markup
-- **Keyboard Navigation:** Full keyboard support
-- **Screen Reader Text:** Hidden but accessible labels
-- **Focus Indicators:** Visible focus states
-- **Skip Links:** Jump to main content
-- **Reduced Motion:** Respects user preferences
+| Mode | Purpose | Key Files |
+|------|----------|-----------|
+| **Replit Mode** | Rapid local development & preview | `index.php`, `/eis-ultra/` |
+| **WordPress Mode** | Full CMS deployment | `/wp-content/themes/eis-ultra-theme/` |
+| **Shared Utilities** | Sync versioning, SEO, assets | `/eis-ultra/includes/version-utils.php` |
 
 ---
 
-## Development Workflow
+## 🧠 Core Concepts
 
-### Local Development Server
+### 1. **Hybrid Header & Footer**
 
-The PHP development server runs on port 5000:
+Both `header.php` and `footer.php` detect the environment automatically:
+```php
+$is_wp = function_exists('language_attributes');
+```
+- If WordPress is loaded → full theme hooks (`wp_head()`, `wp_footer()`) are executed.
+- If not → Replit fallback HTML is rendered with static references to `assets/css/main.css`.
 
+### 2. **Version Synchronization**
+
+All environments use `/VERSION` as a **single source of truth**.
+
+**Path detection in `/eis-ultra/includes/version-utils.php`:**
+```php
+$paths = [
+  __DIR__ . '/../../VERSION',     // Replit
+  __DIR__ . '/../../../VERSION',  // WordPress
+];
+```
+
+This ensures:
+- `footer.php` shows the correct live version  
+- `functions.php` enqueues assets with accurate cache-busting  
+- GitHub Actions automatically bumps version numbers in all environments
+
+---
+
+## 🔄 GitHub Action: Version Bump
+
+Workflow: `.github/workflows/version-bump.yml`
+
+**Trigger:** On `push` to `main`  
+**Action:** Runs `php scripts/bump_version.php patch`
+
+**Effect:**
+- Increments semantic version (`major.minor.patch`)
+- Updates `/VERSION`
+- Auto-commits and pushes the new version tag
+
+Example output:
+```
+✅ Version bumped: 1.0.0 → 1.0.1
+```
+
+---
+
+## ⚡ Development Workflow
+
+### 🧰 Local Development (Replit)
+
+#### `.replit`
+```ini
+modules = ["php-8.2", "python-3.11"]
+
+[workflows]
+runButton = "Project"
+
+[[workflows.workflow]]
+name = "Server"
+author = "agent"
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "php -S 0.0.0.0:8000 -t ."
+waitForPort = 8000
+```
+
+#### Run Command
 ```bash
-# Server automatically starts via workflow
-# Access at: https://[replit-url]
+php -S 0.0.0.0:8000 -t .
 ```
 
-### File Organization
-
-**Template Hierarchy:**
-1. WordPress looks for specific templates (single.php, page.php)
-2. Falls back to index.php if specific template not found
-3. Template parts loaded via get_template_part()
-
-**CSS Organization:**
-- Reset & box-sizing
-- CSS custom properties (variables)
-- Base typography
-- Layout components
-- Navigation
-- Content styles
-- Forms
-- Utilities
-- Media queries
-
-**JavaScript:**
-- Minimal vanilla JS for mobile menu toggle
-- No dependencies (jQuery-free)
-- Deferred loading for performance
+#### Maintenance Alias
+```bash
+alias clean-project='rm -rf __pycache__ .cache .local node_modules .replit_history *.log *.tmp'
+```
 
 ---
 
-## WordPress Integration
+## 🧩 Component Architecture
 
-### Installation in WordPress
-
-1. Copy `wp-content/themes/eis-ultra-theme/` to your WordPress installation
-2. Navigate to **Appearance → Themes** in WordPress admin
-3. Activate **EIS Ultra Theme**
-4. Customize via **Appearance → Customize**
-
-### Theme Features Enabled
-
-- ✅ Automatic feed links
-- ✅ Title tag support
-- ✅ Post thumbnails (featured images)
-- ✅ Custom image sizes
-- ✅ Navigation menus (primary + footer)
-- ✅ HTML5 markup
-- ✅ Custom logo
-- ✅ Custom background
-- ✅ Responsive embeds
-- ✅ Editor styles
-- ✅ Selective refresh widgets
-
-### Widget Areas
-
-**Sidebar (sidebar-1):**
-- Appears on blog posts and pages
-- Supports all standard WordPress widgets
-
-**Footer (footer-1):**
-- Appears in site footer
-- Supports all standard WordPress widgets
+| Component | File | Description |
+|------------|------|--------------|
+| **Hero** | `/components/hero.php` | Displays banner text and call-to-action |
+| **FAQ Block** | `/components/faq-block.php` | Collapsible Q&A UI block |
+| **Contact Form** | `/components/contact-form.php` | Minimal form for static preview |
+| **Testimonials** | `/components/testimonial-carousel.php` | Rotating testimonials slider |
+| **Breadcrumb** | `/components/breadcrumb.php` | Schema-compatible navigation trail |
 
 ---
 
-## Performance Testing
+## 🔍 SEO + Metadata System
 
-### Testing Tools Included
+### Automatic Meta Injection
+Defined in:  
+`/eis-ultra/seo/meta-tags.php`  
+`/eis-ultra/seo/og-twitter.php`  
+`/eis-ultra/seo/schema-org.php`
 
-1. **Performance Dashboard** - `test-performance.php`
-   - Core Web Vitals documentation
-   - Testing tool links
-   - Browser Performance API examples
-   - Performance checklist
+These are included dynamically via:
+```php
+<?php include "eis-ultra/seo/schema-org.php"; ?>
+<?php include "eis-ultra/seo/meta-tags.php"; ?>
+<?php include "eis-ultra/seo/og-twitter.php"; ?>
+```
 
-2. **Browser DevTools**
-   - Press F12 → Lighthouse tab
-   - Run performance audit
-   - Check Core Web Vitals
-
-3. **Online Tools**
-   - Google PageSpeed Insights
-   - WebPageTest
-   - GTmetrix
-
-### Performance Targets
-
-- **Lighthouse Performance Score:** 95+
-- **Lighthouse SEO Score:** 100
-- **LCP (Largest Contentful Paint):** < 2.5s
-- **FID (First Input Delay):** < 100ms
-- **CLS (Cumulative Layout Shift):** < 0.1
-
-### Optimization Checklist
-
-- [x] Minified CSS
-- [x] Minimal JavaScript
-- [x] No external dependencies
-- [x] Semantic HTML
-- [x] Responsive images support
-- [x] Lazy loading compatible
-- [x] Schema.org markup
-- [x] Open Graph tags
-- [x] Cache-friendly (production)
-- [x] Accessibility compliant
+| Type | Injected Tags | Purpose |
+|------|----------------|----------|
+| **Meta** | `<meta name="description">` | Core SEO snippet |
+| **Open Graph** | `og:title`, `og:image`, `og:url` | Facebook + LinkedIn previews |
+| **Twitter Cards** | `twitter:card`, `twitter:image` | Twitter preview integration |
+| **Schema.org JSON-LD** | Structured data for `Article` / `WebPage` | Google SERP rich results |
 
 ---
 
-## Customization Guide
+## 🧾 functions.php Breakdown
 
-### Modifying Colors
+Key WordPress hooks:
 
-Edit CSS custom properties in `style.css`:
+| Hook | Purpose |
+|------|----------|
+| `after_setup_theme` | Initializes menus, logos, and post thumbnails |
+| `wp_enqueue_scripts` | Loads styles and scripts with versioned cache-busting |
+| `wp_head` | Adds SEO metadata |
+| `wp_footer` | Injects schema.org JSON-LD + version info |
+| `init` | Cleans up emojis, legacy meta, and unneeded scripts |
+| `excerpt_length`, `excerpt_more` | Streamlined post excerpts |
+| `widgets_init` | Registers sidebar and footer widget areas |
 
-```css
-:root {
-  --color-primary: #2563eb;      /* Primary brand color */
-  --color-secondary: #1e293b;    /* Secondary/headings */
-  --color-text: #334155;         /* Body text */
-  --color-background: #ffffff;   /* Background */
+---
+
+## 🧩 Version Display Logic
+
+Footer display comes from:
+```php
+function eis_ultra_theme_display_version() {
+    $version = eis_ultra_get_version();
+    echo '<div class="theme-version">🩺 EIS Ultra Theme v' . esc_html($version) . '</div>';
 }
+add_action('wp_footer', 'eis_ultra_theme_display_version', 100);
 ```
 
-### Adding New Templates
+Also renders in Replit mode (no WordPress dependency):
+```php
+echo '<div class="theme-version">🩺 EIS Ultra Theme v' . htmlspecialchars($theme_version) . '</div>';
+```
 
-Create template files following WordPress naming conventions:
-- `single-{post-type}.php` - Custom post type single
-- `archive-{post-type}.php` - Custom post type archive
-- `page-{slug}.php` - Specific page template
-- `category-{slug}.php` - Category archive
+---
 
-### Adding Template Parts
+## 🧮 Asset Handling
 
-Create new components in `template-parts/`:
+All assets are versioned dynamically using the same `$theme_version` from `version-utils.php`:
 
 ```php
-<?php get_template_part('template-parts/my-component'); ?>
+wp_enqueue_style('eis-ultra-style', get_stylesheet_uri(), [], $theme_version);
+wp_enqueue_script('eis-ultra-main-js', get_template_directory_uri() . '/assets/js/main.js', [], $theme_version, true);
 ```
 
-### Modifying Functions
-
-Edit `functions.php` to:
-- Register custom post types
-- Add theme options
-- Enqueue additional scripts/styles
-- Modify excerpt length
-- Add custom widgets
+This ensures browser cache invalidation on every release bump.
 
 ---
 
-## File Descriptions
+## 🧱 Build & Deployment Strategy
 
-### Core Templates
-
-- **style.css** - Theme stylesheet + metadata header
-- **functions.php** - Theme setup, hooks, filters
-- **index.php** - Main template for blog archives
-- **header.php** - Site header (logo, navigation)
-- **footer.php** - Site footer (copyright, footer menu)
-- **sidebar.php** - Widget area for sidebar
-
-### Page Templates
-
-- **single.php** - Individual blog post display
-- **page.php** - Static page display
-- **archive.php** - Category/tag/date archives
-- **search.php** - Search results page
-- **404.php** - Page not found error
-
-### Components
-
-- **comments.php** - Comment list and form
-- **searchform.php** - Custom search form HTML
-
-### Template Parts
-
-- **content.php** - Post loop content
-- **content-single.php** - Full single post
-- **content-page.php** - Page content
-- **content-search.php** - Search result item
-- **content-none.php** - No results message
+| Phase | Environment | Description |
+|-------|--------------|--------------|
+| **Phase 1** | Replit | Design, layout, and SEO structure |
+| **Phase 2** | WordPress | Full theme integration and validation |
+| **Phase 3** | GitHub Actions | Automated versioning and CI |
+| **Phase 4** | Cloud / CDN | Deployment to production environment |
 
 ---
 
-## Technical Details
+## 🧪 Testing & Optimization
 
-### PHP Version
-- **Required:** PHP 7.4+
-- **Recommended:** PHP 8.2+
-- **Installed:** PHP 8.2
+### Local Testing Tools
+- `/test-performance.php` for visual verification  
+- Chrome Lighthouse (Core Web Vitals)  
+- `error_log()` outputs in Replit console  
 
-### WordPress Version
-- **Minimum:** WordPress 5.0
-- **Tested up to:** WordPress 6.4
-
-### Browser Support
-- Modern browsers (Chrome, Firefox, Safari, Edge)
-- Mobile browsers (iOS Safari, Chrome Mobile)
-- Progressive enhancement for older browsers
-
-### Standards Compliance
-- WordPress Coding Standards
-- HTML5 validation
-- CSS3 standards
-- WCAG 2.1 Level AA accessibility
-- Schema.org structured data
+### Optimization Targets
+| Metric | Target | Method |
+|:--|:--|:--|
+| **LCP** | ≤ 2.0s | Inline critical CSS |
+| **CLS** | ≤ 0.1 | Avoid layout shifts |
+| **INP** | ≤ 100ms | Lazyload non-critical JS |
+| **Size** | ≤ 1MB | Minify & compress assets |
 
 ---
 
-## Troubleshooting
+## 🧠 Dev Notes
 
-### Common Issues
-
-**Theme not showing in WordPress:**
-- Ensure folder is in `wp-content/themes/`
-- Check that `style.css` has theme header
-- Verify file permissions
-
-**Styles not loading:**
-- Clear browser cache
-- Check WordPress admin → Appearance → Customize
-- Verify `wp_head()` and `wp_footer()` in templates
-
-**Menu not appearing:**
-- Create menu in WordPress admin
-- Assign to "Primary Menu" location
-- Ensure `wp_nav_menu()` is in header.php
-
-**Performance issues:**
-- Enable caching plugin
-- Optimize images before upload
-- Use CDN for static assets
-- Enable Gzip compression
+- ✅ All PHP files are **namespace-safe** (no global pollution)  
+- ✅ Supports PHP 8.2 strict types  
+- ✅ Theme is **fully WordPress-compliant** and **preview-safe**  
+- ✅ Local assets and CDN fallbacks supported  
+- ✅ `version-utils.php` prevents drift between Replit + WordPress  
 
 ---
 
-## Resources
+## 📦 Future Expansion
 
-### WordPress Documentation
-- [Theme Development Handbook](https://developer.wordpress.org/themes/)
-- [Template Hierarchy](https://developer.wordpress.org/themes/basics/template-hierarchy/)
-- [Theme Functions](https://developer.wordpress.org/themes/basics/theme-functions/)
-
-### Performance
-- [Web.dev Core Web Vitals](https://web.dev/vitals/)
-- [Google PageSpeed Insights](https://pagespeed.web.dev/)
-- [Lighthouse Documentation](https://developers.google.com/web/tools/lighthouse)
-
-### Accessibility
-- [WCAG Guidelines](https://www.w3.org/WAI/WCAG21/quickref/)
-- [WordPress Accessibility](https://make.wordpress.org/accessibility/)
+| Feature | Status |
+|:--|:--|
+| 🧠 AI-driven SEO Schema Assistant | Planned (Phase 2.5) |
+| 🧾 Plugin auto-installer for ReimburseIQ™ | Planned |
+| 🧩 Gutenberg block versions of core components | In Progress |
+| 📊 Realtime Lighthouse telemetry sync | Planned |
+| 🧰 NPM + Build pipeline integration | Optional for later CI/CD stage |
 
 ---
 
-## License
+## 💬 Support & Contribution
 
-This theme is licensed under the GNU General Public License v2 or later.
+| Resource | Link |
+|-----------|------|
+| Documentation | [`README.md`](./README.md) |
+| Quick Start | [`QUICK_START.md`](./QUICK_START.md) |
+| GitHub Repo | [github.com/EISUltra/eis-ultra-theme](https://github.com/EISUltra/eis-ultra-theme) |
+| WordPress Docs | [developer.wordpress.org/themes](https://developer.wordpress.org/themes/) |
+| Community Support | [wordpress.org/support/forums](https://wordpress.org/support/forums/) |
 
 ---
 
-## Support & Maintenance
+## 🧾 License
 
-**Theme Version:** 1.0.0  
-**PHP Version:** 8.2  
-**WordPress Compatibility:** 5.0+  
-**Last Updated:** October 29, 2025
+Licensed under **GPLv2 or later**  
+[http://www.gnu.org/licenses/gpl-2.0.html](http://www.gnu.org/licenses/gpl-2.0.html)
 
-For theme customization, refer to the WordPress Theme Development Handbook and the comments throughout the theme files.
+---
+
+**Author:** EIS Ultra Theme Development  
+**Version:** 1.0.0  
+**Last Updated:** October 29, 2025  
+
+> *"Fast pages, happy users — everywhere they load."
